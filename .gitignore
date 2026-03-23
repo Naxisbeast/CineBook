@@ -1,0 +1,22 @@
+# .gitignore — specifies intentionally untracked files to ignore in this repository
+
+# Node dependencies
+node_modules/
+
+# Environment variables (never commit secrets)
+.env
+
+# macOS metadata files
+.DS_Store
+
+# Build output directories
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor directories
+.vscode/
+.idea/
