@@ -5,20 +5,4 @@
 
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
-});
-
-// Attach JWT token to every request if present
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-export default api;
+// TODO: Create an Axios instance with baseURL pointing to the backend API, add a request interceptor that reads the JWT from localStorage and attaches it as a Bearer token, then export the instance as default

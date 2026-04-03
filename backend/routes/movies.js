@@ -10,47 +10,12 @@ const router = express.Router();
 
 // GET /api/movies
 router.get('/', async (_req, res) => {
-  try {
-    const [rows] = await db.query(
-      'SELECT * FROM Movies ORDER BY title'
-    );
-    res.json(rows);
-  } catch (err) {
-    console.error('Get movies error:', err);
-    res.status(500).json({ message: 'Failed to fetch movies.' });
-  }
+  // TODO: Query all movies from the database ordered by title and return them as JSON
 });
 
 // GET /api/movies/:id
 router.get('/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const [movieRows] = await db.query(
-      'SELECT * FROM Movies WHERE movie_id = ?',
-      [id]
-    );
-
-    if (movieRows.length === 0) {
-      return res.status(404).json({ message: 'Movie not found.' });
-    }
-
-    const [showRows] = await db.query(
-      `SELECT ss.show_id, ss.show_date, ss.show_time, ss.price,
-              sc.name AS screen, t.name AS theatre, t.city
-       FROM ShowSchedules ss
-       JOIN Screens sc  ON ss.screen_id  = sc.screen_id
-       JOIN Theatres t  ON sc.theatre_id = t.theatre_id
-       WHERE ss.movie_id = ? AND ss.show_date >= CURDATE()
-       ORDER BY ss.show_date, ss.show_time`,
-      [id]
-    );
-
-    res.json({ movie: movieRows[0], shows: showRows });
-  } catch (err) {
-    console.error('Get movie error:', err);
-    res.status(500).json({ message: 'Failed to fetch movie details.' });
-  }
+  // TODO: Query the movie by id and its upcoming show schedules (joined with screens and theatres), return 404 if not found, otherwise return the movie and shows as JSON
 });
 
 module.exports = router;

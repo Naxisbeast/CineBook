@@ -17,35 +17,13 @@ import LoginPage       from './pages/LoginPage.jsx';
 import RegisterPage    from './pages/RegisterPage.jsx';
 import ProfilePage     from './pages/ProfilePage.jsx';
 
-// ProtectedRoute — redirects to /login if the user is not authenticated
-function ProtectedRoute({ children }) {
-  const { user } = useAuth();
-  return user ? children : <Navigate to="/login" replace />;
-}
-
 function AppRoutes() {
   return (
     <>
       <Navbar />
       <main className="container mx-auto px-4 py-6">
         <Routes>
-          <Route path="/"               element={<HomePage />} />
-          <Route path="/movies/:id"     element={<MoviePage />} />
-          <Route path="/login"          element={<LoginPage />} />
-          <Route path="/register"       element={<RegisterPage />} />
-
-          <Route path="/booking/:showId" element={
-            <ProtectedRoute><BookingPage /></ProtectedRoute>
-          } />
-          <Route path="/payment/:bookingId" element={
-            <ProtectedRoute><PaymentPage /></ProtectedRoute>
-          } />
-          <Route path="/profile" element={
-            <ProtectedRoute><ProfilePage /></ProtectedRoute>
-          } />
-
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* TODO: Define all page routes here, including protected routes for BookingPage, PaymentPage, and ProfilePage that redirect to /login when the user is not authenticated */}
         </Routes>
       </main>
     </>

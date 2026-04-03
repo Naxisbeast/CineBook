@@ -17,32 +17,10 @@ const payments = require('./routes/payments');
 const app  = express();
 const PORT = process.env.PORT || 5000;
 
-// ── Middleware ────────────────────────────────────────────────────────────────
-app.use(cors());
-app.use(express.json());
+// TODO: Add cors() and express.json() as global middleware
 
-// ── Health check ──────────────────────────────────────────────────────────────
-app.get('/api', (_req, res) => {
-  res.json({ message: 'CineBook API is running' });
-});
+// TODO: Mount each route module at its correct API path
 
-// ── Routes ────────────────────────────────────────────────────────────────────
-app.use('/api/auth',     auth);
-app.use('/api/movies',   movies);
-app.use('/api/shows',    shows);
-app.use('/api/seats',    seats);
-app.use('/api',          bookings);
-app.use('/api',          payments);
-
-// ── Start server & verify database connection ─────────────────────────────────
-app.listen(PORT, async () => {
-  console.log(`CineBook server started on port ${PORT}`);
-  try {
-    await db.query('SELECT 1');
-    console.log('Database connection established successfully');
-  } catch (err) {
-    console.error('Database connection failed:', err.message);
-  }
-});
+// TODO: Start the server on PORT and verify the database connection inside the callback
 
 module.exports = app;
